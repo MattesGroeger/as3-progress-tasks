@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="matgro_loadertask"> 
+
+	<property file="project.properties" />
+	
+	<target name="properties">
+		<fail unless="FLEX_HOME">The "FLEX_HOME" property must be set in your global ANT properties!</fail>
+		<fail unless="EXECUTABLE_EXTENSION">The "EXECUTABLE_EXTENSION" property must be set in your global ANT properties!</fail>
+	</target>
+	
+	<target name="compile swc" description="Builds library" depends="properties">
+		<exec executable="${compc}" dir="${basedir}" failonerror="true">
+			<arg line="-o '${deploy.dir}/${binary.name}.swc'" />
+			<arg line="-sp '${src.dir}'" />
+			<arg line="-is '${src.dir}'" />
+			<arg line="-el '${libs.dir}'" />
+			<arg line="-el '${playerglobal.swc}'" />
+			<arg line="-target-player ${target.player}" />
+		</exec>
+	</target>
+	
+	<target name="generate asdoc" description="Generate documentation" depends="properties">
+		<delete includeemptydirs="true">
+			<fileset dir="${docs.local.dir}" includes="**/*" />
+		</delete>
+		<exec executable="${asdoc}" spawn="no">
+			<arg line="-o '${docs.local.dir}'" />
+			<arg line="-l '${libs.dir}'" />
+			<arg line="-sp '${src.dir}'" />
+			<arg line="-ds '${src.dir}' " />
+			<arg line="-window-title 'Adobe ActionScript 3.0 Library - ${project.title}'" />
+		</exec>
+	</target>
+	
+</project>

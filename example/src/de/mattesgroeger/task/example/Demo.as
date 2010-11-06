@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.mattesgroeger.task
+package de.mattesgroeger.task.example
 {
 	import de.mattesgroeger.task.progress.ProgressTaskGroup;
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
