@@ -21,6 +21,7 @@
  */
 package de.mattesgroeger.task.example
 {
+	import de.mattesgroeger.task.example.view.ProgressView;
 	import de.mattesgroeger.task.progress.ProgressTaskGroup;
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
 	import de.mattesgroeger.task.util.FakeProgressTask;
@@ -28,25 +29,24 @@ package de.mattesgroeger.task.example
 	import org.spicefactory.lib.task.Task;
 	import org.spicefactory.lib.task.events.TaskEvent;
 
-	import flash.display.Shape;
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormat;
 
 	public class Demo extends Sprite
 	{
-		private var targetScale:Number = 0;
-		
-		private var progressShape:Shape;
-		private var progressPercent:TextField;
-		private var progressLabel:TextField;
+		private var progressView:ProgressView;
 		
 		public function Demo()
 		{
 			initializeProgressDisplay();
 			initializeProgressTasks();
+		}
+
+		private function initializeProgressDisplay():void
+		{
+			progressView = new ProgressView();
+			addChild(progressView);
+			
+			progressView.initialize();
 		}
 
 		private function initializeProgressTasks():void
@@ -78,58 +78,15 @@ package de.mattesgroeger.task.example
 			return subTaskGroup;
 		}
 
-		private function initializeProgressDisplay():void
-		{
-			progressShape = new Shape();
-			progressShape.graphics.beginFill(0);
-			progressShape.graphics.drawRect(0, 67, stage.stageWidth, 2);
-			progressShape.graphics.endFill();
-			progressShape.scaleX = 0;
-			addChild(progressShape);
-			
-			progressLabel = createTextField(20, false, 0x666666);
-			progressLabel.y = 45;
-			addChild(progressLabel);
-			
-			progressPercent = createTextField(150, true, 0x333333);
-			progressPercent.x = -3;
-			progressPercent.y = 45;
-			addChild(progressPercent);
-			
-			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
-		}
-
-		private function createTextField(fontSize:uint, bold:Boolean, color:uint):TextField
-		{
-			var textFormat:TextFormat = new TextFormat();
-			textFormat.font = "Arial";
-			textFormat.size = fontSize;
-			textFormat.color = color;
-			textFormat.bold = bold;
-			
-			var textField:TextField = new TextField();
-			textField.defaultTextFormat = textFormat;
-			textField.autoSize = TextFieldAutoSize.LEFT;
-			
-			return textField;
-		}
-
-		private function handleEnterFrame(event:Event):void
-		{
-			progressShape.scaleX += (targetScale - progressShape.scaleX) / 2;
-		}
-
 		private function handleProgress(event:ProgressTaskEvent):void
 		{
-			progressPercent.text = String(Math.round(event.progress * 100));
-			targetScale = event.progress;
-			
-			progressLabel.text = event.label;
+			progressView.setProgress(event.progress);
+			progressView.setLabel(event.label);
 		}
 
 		private function handleComplete(event:TaskEvent):void
 		{
-			progressLabel.text = "COMPLETE";
+			progressView.setLabel("COMPLETE");
 		}
 	}
 }
