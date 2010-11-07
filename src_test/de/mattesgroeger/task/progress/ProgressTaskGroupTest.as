@@ -72,11 +72,11 @@ package de.mattesgroeger.task.progress
 		}
 
 		[Test(async)]
-		public function test_ratio_progress():void
+		public function test_weighted_progress():void
 		{
 			var group:ProgressTaskGroup = new ProgressTaskGroup();
-			group.addTaskRatio(new MockProgressTask("task1"), 25);
-			group.addTaskRatio(new MockProgressTask("task2"), 75);
+			group.addTaskWeighted(new MockProgressTask("task1"), 25);
+			group.addTaskWeighted(new MockProgressTask("task2"), 75);
 
 			assertGroupProgress(group, [0, 	  0.125, 0.25, 
 										0.25, 0.625, 1], 
@@ -85,7 +85,7 @@ package de.mattesgroeger.task.progress
 		}
 
 		[Test(async)]
-		public function test_sub_group_ratio_progress():void
+		public function test_sub_group_weighted_progress():void
 		{
 			var subGroup:ProgressTaskGroup = new ProgressTaskGroup();
 			subGroup.addTask(new MockProgressTask("task2"));
@@ -93,8 +93,8 @@ package de.mattesgroeger.task.progress
 			subGroup.addTask(new MockProgressTask("task4"));
 
 			var group:ProgressTaskGroup = new ProgressTaskGroup();
-			group.addTaskRatio(new MockProgressTask("task1"), 25);
-			group.addTaskRatio(subGroup, 75);
+			group.addTaskWeighted(new MockProgressTask("task1"), 25);
+			group.addTaskWeighted(subGroup, 75);
 
 			assertGroupProgress(group,  [	0, 0.125, 0.25, 
 												0.25, 0.375, 0.5, 

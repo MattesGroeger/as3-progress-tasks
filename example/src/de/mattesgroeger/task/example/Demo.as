@@ -24,7 +24,7 @@ package de.mattesgroeger.task.example
 	import de.mattesgroeger.task.example.tasks.FileTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.NormalTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.ProgressTaskGroupFactory;
-	import de.mattesgroeger.task.example.tasks.RatioTaskGroupFactory;
+	import de.mattesgroeger.task.example.tasks.WeightedTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.SubTaskGroupFactory;
 	import de.mattesgroeger.task.example.view.ProgressView;
 	import de.mattesgroeger.task.example.view.TaskButtonBar;
@@ -64,7 +64,7 @@ package de.mattesgroeger.task.example
 			buttonBar.addEventListener(MouseEvent.CLICK, handleButtonBarClick);
 
 			buttonBar.addButton(new NormalTaskGroupFactory(), "Normal Tasks");
-			buttonBar.addButton(new RatioTaskGroupFactory(), "Ratio Tasks");
+			buttonBar.addButton(new WeightedTaskGroupFactory(), "Weighted Tasks");
 			buttonBar.addButton(new SubTaskGroupFactory(), "SubGroup Tasks");
 			buttonBar.addButton(new FileTaskGroupFactory(), "File Loader Tasks");
 

@@ -32,11 +32,11 @@ The following example creates a task group to load two files. By listening for t
 		trace(event.progress);
 	}
 
-If your tasks vary heavily in size, you can define a ratio for each task. The ratio values are relative to each other. You can use percentage numbers or your own units. It's up to you:
+If your tasks vary greatly in size, you can define a weight for each task. The weight values are relative to each other. You can either use percentage numbers, file sizes or your own units. It's up to you:
 
 	var taskGroup:ProgressTaskGroup = new ProgressTaskGroup();
-	taskGroup.addTaskRatio(swfLoader, 80);
-	taskGroup.addTaskRatio(xmlLoader, 20);
+	taskGroup.addTaskWeighted(swfLoader, 80);
+	taskGroup.addTaskWeighted(xmlLoader, 20);
 	taskGroup.start();
 
 To allow the progress tracking in bigger application – over different layers – you can nest as many groups as you want. The `ProgressTaskGroup` will then provide you always with the total progress:
@@ -46,11 +46,11 @@ To allow the progress tracking in bigger application – over different layers �
 	xmlGroup.addTask(xmlLoader2);
 	
 	var rootGroup:ProgressTaskGroup = new ProgressTaskGroup();
-	rootGroup.addTaskRatio(swfLoader, 80);
-	rootGroup.addTaskRatio(xmlGroup, 20);
+	rootGroup.addTaskWeighted(swfLoader, 80);
+	rootGroup.addTaskWeighted(xmlGroup, 20);
 	rootGroup.start();
 
-Note: You can mix normal task and ratio task assignments. But keep in mind, that the normal tasks always have a ratio of 1 internally. 
+Note: You can mix normal task and weighted task assignments. But keep in mind, that the normal tasks always have a weight of 1 internally. 
 
 You can also assign non-progress tasks to a `ProgressTaskGroup`. But the overall progress won't be updated while the assigned tasks are executed.
 

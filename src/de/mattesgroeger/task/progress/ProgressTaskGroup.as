@@ -32,8 +32,8 @@ package de.mattesgroeger.task.progress
 	[Event(name="progress", type="de.mattesgroeger.task.progress.events.ProgressTaskEvent")]
 	public class ProgressTaskGroup extends SequentialTaskGroup
 	{
-		private var totalTicks:uint = 0;
-		private var ratioMap:Dictionary = new Dictionary(true);
+		private var totalWeight:uint = 0;
+		private var weightMap:Dictionary = new Dictionary(true);
 		private var completedProgress:uint = 0;
 		
 		public function ProgressTaskGroup(label:String = null)
@@ -51,14 +51,14 @@ package de.mattesgroeger.task.progress
 			
 		public override function addTask(task:Task):Boolean
 		{
-			storeTaskRatio(task, 1);
+			storeTaskWeighted(task, 1);
 			
 			return super.addTask(task);
 		}
 
-		public function addTaskRatio(task:Task, ticks:uint):Boolean
+		public function addTaskWeighted(task:Task, weight:uint):Boolean
 		{
-			storeTaskRatio(task, ticks);
+			storeTaskWeighted(task, weight);
 			
 			return super.addTask(task);
 		}
@@ -67,20 +67,20 @@ package de.mattesgroeger.task.progress
 		{
 			if (task.state == TaskState.INACTIVE)
 			{
-				var ticks:uint = ratioMap[task];
-				totalTicks -= ticks;
-				completedProgress -= ticks;
+				var weight:uint = weightMap[task];
+				totalWeight -= weight;
+				completedProgress -= weight;
 			}
 			
-			delete ratioMap[task];
+			delete weightMap[task];
 			
 			return super.removeTask(task);
 		}
 			
 		public override function removeAllTasks():void
 		{
-			ratioMap = new Dictionary(true);
-			totalTicks = 0;
+			weightMap = new Dictionary(true);
+			totalWeight = 0;
 			completedProgress = 0;
 			
 			super.removeAllTasks();
@@ -99,7 +99,7 @@ package de.mattesgroeger.task.progress
 			if (task is ProgressTask) 
 				dispatchCurrentProgress(task, 1, ProgressTask(task).label);
 			
-			completedProgress += uint(ratioMap[task]);
+			completedProgress += uint(weightMap[task]);
 			
 			super.handleTaskComplete(task);
 		}
@@ -111,8 +111,8 @@ package de.mattesgroeger.task.progress
 
 		private function dispatchCurrentProgress(task:Task, progress:Number, childLabel:String):void
 		{
-			var taskPercent:Number = uint(ratioMap[task]) / totalTicks;
-			var totalProgress:Number = ((completedProgress / totalTicks) + (progress * taskPercent));
+			var taskPercent:Number = uint(weightMap[task]) / totalWeight;
+			var totalProgress:Number = ((completedProgress / totalWeight) + (progress * taskPercent));
 
 			if (parent != null && parent is ProgressTaskGroup)
 				ProgressTaskGroup(parent).progressChild(this, totalProgress, childLabel);
@@ -120,10 +120,10 @@ package de.mattesgroeger.task.progress
 			dispatchEvent(new ProgressTaskEvent(ProgressTaskEvent.PROGRESS, totalProgress, childLabel));
 		}
 
-		private function storeTaskRatio(task:Task, ticks:int):void
+		private function storeTaskWeighted(task:Task, weight:int):void
 		{
-			totalTicks += ticks;
-			ratioMap[task] = ticks;
+			totalWeight += weight;
+			weightMap[task] = weight;
 		}
 	}
 }

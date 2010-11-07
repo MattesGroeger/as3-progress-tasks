@@ -26,19 +26,19 @@ package de.mattesgroeger.task.example.tasks
 
 	import org.spicefactory.lib.task.Task;
 
-	public class RatioTaskGroupFactory implements ProgressTaskGroupFactory
+	public class WeightedTaskGroupFactory implements ProgressTaskGroupFactory
 	{
 		public function create():ProgressTaskGroup
 		{
 			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
 			
-			var task1:Task = new FakeProgressTask("TASK 1 (500ms, ratio 2)", 500);
-			var task2:Task = new FakeProgressTask("TASK 2 (2000ms, ratio 8)", 2000);
-			var task3:Task = new FakeProgressTask("TASK 3 (250ms, ratio 1)", 250);
+			var task1:Task = new FakeProgressTask("TASK 1 (500ms, weight 2)", 500);
+			var task2:Task = new FakeProgressTask("TASK 2 (2000ms, weight 8)", 2000);
+			var task3:Task = new FakeProgressTask("TASK 3 (250ms, weight 1)", 250);
 			
-			taskGroup.addTaskRatio(task1, 2);
-			taskGroup.addTaskRatio(task2, 8);
-			taskGroup.addTaskRatio(task3, 1);
+			taskGroup.addTaskWeighted(task1, 2);
+			taskGroup.addTaskWeighted(task2, 8);
+			taskGroup.addTaskWeighted(task3, 1);
 			
 			return taskGroup;
 		}
