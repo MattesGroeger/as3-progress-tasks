@@ -21,6 +21,7 @@
  */
 package de.mattesgroeger.task.progress
 {
+	import org.spicefactory.lib.errors.IllegalArgumentError;
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
 	import org.spicefactory.lib.task.Task;
 	
@@ -48,6 +49,9 @@ package de.mattesgroeger.task.progress
 		
 		protected function progress(progress:Number):void
 		{
+			if (progress < 0 || progress > 1)
+				throw new IllegalArgumentError("Allowed progress range reaches from 0 to 1, but is currently " + progress);
+			
 			if (parent != null && parent is ProgressTaskGroup)
 				ProgressTaskGroup(parent).progressChild(this, progress, _label);
 			

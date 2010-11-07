@@ -32,13 +32,13 @@ package de.mattesgroeger.task.util
 	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
 
-	public class SWFLoaderTask extends AbstractLoaderTask
+	public class SwfLoaderTask extends AbstractLoaderTask
 	{
 		protected var _loader:Loader;
 		protected var _loaderContext:LoaderContext;
 		protected var _container:DisplayObjectContainer;
 
-		public function SWFLoaderTask(fileUrl:String, label:String = null, context:LoaderContext = null, loader:Loader = null, targetContainer:DisplayObjectContainer = null):void
+		public function SwfLoaderTask(fileUrl:String, label:String = null, context:LoaderContext = null, loader:Loader = null, targetContainer:DisplayObjectContainer = null):void
 		{
 			super(fileUrl, label);
 			
@@ -83,7 +83,7 @@ package de.mattesgroeger.task.util
 		
 		public override function toString():String 
 		{
-			return "[SWFLoaderTask]";
+			return "[SwfLoaderTask]";
 		}
 
 		protected override function doStart():void

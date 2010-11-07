@@ -25,13 +25,13 @@ package de.mattesgroeger.task.util
 	import flash.net.URLLoader;
 	import flash.text.StyleSheet;
 	
-	public class CSSLoaderTask extends URLLoaderTask
+	public class CssLoaderTask extends UrlLoaderTask
 	{
 		protected var _styleSheet : StyleSheet;
 		
-		public function CSSLoaderTask(file : String, label : String = null, loader : URLLoader = null)
+		public function CssLoaderTask(fileUrl : String, label : String = null, loader : URLLoader = null)
 		{
-			super(file, label, loader);
+			super(fileUrl, label, loader);
 			
 			_styleSheet = new StyleSheet();
 		}
@@ -39,8 +39,6 @@ package de.mattesgroeger.task.util
 		protected override function handleComplete(event : Event) : void
 		{
 			_styleSheet.parseCSS(_loader.data);
-			
-			complete();
 			
 			super.handleComplete(event);
 		}
@@ -52,7 +50,7 @@ package de.mattesgroeger.task.util
 		
 		public override function toString() : String 
 		{
-			return "[CSSLoaderTask]";
+			return "[CssLoaderTask]";
 		}
 	}
 }

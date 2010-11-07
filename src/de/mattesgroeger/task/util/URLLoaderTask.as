@@ -28,13 +28,13 @@ package de.mattesgroeger.task.util
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 
-	public class URLLoaderTask extends AbstractLoaderTask
+	public class UrlLoaderTask extends AbstractLoaderTask
 	{
 		protected var _loader:URLLoader;
 
-		public function URLLoaderTask(file:String, label:String = null, loader:URLLoader = null)
+		public function UrlLoaderTask(fileUrl:String, label:String = null, loader:URLLoader = null)
 		{
-			super(file, label);
+			super(fileUrl, label);
 			
 			_loader = (loader == null) ? new URLLoader() : loader;
 		}
@@ -51,7 +51,7 @@ package de.mattesgroeger.task.util
 
 		public override function toString():String
 		{
-			return "[URLLoaderTask]";
+			return "[UrlLoaderTask]";
 		}
 
 		protected override function doStart():void

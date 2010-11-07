@@ -21,9 +21,25 @@
  */
 package
 {
+	import de.mattesgroeger.task.progress.ProgressTaskGroupTest;
+	import de.mattesgroeger.task.progress.ProgressTaskTest;
+	import de.mattesgroeger.task.util.BinaryLoaderTaskTest;
+	import de.mattesgroeger.task.util.CssLoaderTaskTest;
+	import de.mattesgroeger.task.util.Mp3LoaderTaskTest;
+	import de.mattesgroeger.task.util.SwfLoaderTaskTest;
+	import de.mattesgroeger.task.util.XmlLoaderTaskTest;
+
 	[Suite]
 	[RunWith("org.flexunit.runners.Suite")]
 	public class ModulesTestSuite
 	{
+		public var progressTaskTest:ProgressTaskTest;
+		public var progressTaskGroupTest:ProgressTaskGroupTest;
+		
+		public var binaryLoaderTaskTest:BinaryLoaderTaskTest;
+		public var cssLoaderTaskTest:CssLoaderTaskTest;
+		public var mp3LoaderTaskTest:Mp3LoaderTaskTest;
+		public var swfLoaderTaskTest:SwfLoaderTaskTest;
+		public var xmlLoaderTaskTest:XmlLoaderTaskTest;
 	}
 }

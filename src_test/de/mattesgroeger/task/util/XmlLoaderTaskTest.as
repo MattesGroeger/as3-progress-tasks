@@ -21,27 +21,26 @@
  */
 package de.mattesgroeger.task.util
 {
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.utils.ByteArray;
+	import org.flexunit.asserts.assertNotNull;
+	import org.flexunit.async.Async;
+	import org.spicefactory.lib.task.events.TaskEvent;
 
-	public class BinaryLoaderTask extends UrlLoaderTask
+	public class XmlLoaderTaskTest
 	{
-		public function BinaryLoaderTask(fileUrl:String, label:String = null, loader:URLLoader = null)
+		[Test(async)]
+		public function test_loading():void
 		{
-			super(fileUrl, label, loader);
+			var loader:XmlLoaderTask = new XmlLoaderTask("assets/dummy.xml");
 
-			_loader.dataFormat = URLLoaderDataFormat.BINARY;
+			loader.addEventListener(TaskEvent.COMPLETE, Async.asyncHandler(this, handleFileComplete, 1000));
+			loader.start();
 		}
 
-		public function get bytes():ByteArray
+		private function handleFileComplete(event:TaskEvent, passThrougData:Object):void
 		{
-			return _loader.data as ByteArray;
-		}
+			var task:XmlLoaderTask = XmlLoaderTask(event.target);
 
-		public override function toString():String
-		{
-			return "[BinaryLoaderTask]";
+			assertNotNull(task.xml);
 		}
 	}
 }

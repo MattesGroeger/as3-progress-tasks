@@ -88,16 +88,16 @@ package de.mattesgroeger.task.progress
 			
 		protected override function startTask(task:Task):void
 		{
-			var childLabel:String = (task is ProgressTask) ? ProgressTask(task).label : task.toString();
-			dispatchCurrentProgress(task, 0, childLabel);
+			if (task is ProgressTask)
+				dispatchCurrentProgress(task, 0, ProgressTask(task).label);
 			
 			super.startTask(task);
 		}
 		
 		protected override function handleTaskComplete(task:Task):void
 		{
-			var childLabel:String = (task is ProgressTask) ? ProgressTask(task).label : task.toString();
-			dispatchCurrentProgress(task, 1, childLabel);
+			if (task is ProgressTask) 
+				dispatchCurrentProgress(task, 1, ProgressTask(task).label);
 			
 			completedProgress += uint(ratioMap[task]);
 			

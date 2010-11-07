@@ -24,11 +24,11 @@ package de.mattesgroeger.task.util
 	import flash.events.Event;
 	import flash.net.URLLoader;
 
-	public class XMLLoaderTask extends URLLoaderTask
+	public class XmlLoaderTask extends UrlLoaderTask
 	{
 		protected var _xml:XML;
 
-		public function XMLLoaderTask(file:String, label:String = null, loader:URLLoader = null)
+		public function XmlLoaderTask(file:String, label:String = null, loader:URLLoader = null)
 		{
 			super(file, label, loader);
 
@@ -49,8 +49,6 @@ package de.mattesgroeger.task.util
 
 			_xml = xml;
 
-			complete();
-
 			super.handleComplete(event);
 		}
 
@@ -61,7 +59,7 @@ package de.mattesgroeger.task.util
 
 		public override function toString():String
 		{
-			return "[XMLLoaderTask]";
+			return "[XmlLoaderTask]";
 		}
 	}
 }

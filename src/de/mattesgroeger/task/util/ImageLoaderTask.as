@@ -25,7 +25,7 @@ package de.mattesgroeger.task.util
 	import flash.display.Loader;
 	import flash.system.LoaderContext;
 
-	public class ImageLoaderTask extends SWFLoaderTask
+	public class ImageLoaderTask extends SwfLoaderTask
 	{
 		public function ImageLoaderTask(fileUrl:String, label:String = null, context:LoaderContext = null, loader:Loader = null, targetContainer:DisplayObjectContainer = null)
 		{

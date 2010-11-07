@@ -21,27 +21,41 @@
  */
 package de.mattesgroeger.task.util
 {
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.utils.ByteArray;
+	import org.flexunit.asserts.assertEquals;
+	import flash.display.Sprite;
+	import flash.display.DisplayObjectContainer;
+	import org.flexunit.asserts.assertNotNull;
+	import org.flexunit.async.Async;
+	import org.spicefactory.lib.task.events.TaskEvent;
 
-	public class BinaryLoaderTask extends UrlLoaderTask
+	public class SwfLoaderTaskTest
 	{
-		public function BinaryLoaderTask(fileUrl:String, label:String = null, loader:URLLoader = null)
+		private var container:DisplayObjectContainer;
+		
+		[Before]
+		public function tearUp():void
 		{
-			super(fileUrl, label, loader);
+			container = new Sprite();
+		}
+		
+		[Test(async)]
+		public function test_loading():void
+		{
+			var loader:SwfLoaderTask = new SwfLoaderTask("assets/dummy.swf", "test", null, null, container);
 
-			_loader.dataFormat = URLLoaderDataFormat.BINARY;
+			loader.addEventListener(TaskEvent.COMPLETE, Async.asyncHandler(this, handleFileComplete, 1000));
+			loader.start();
 		}
 
-		public function get bytes():ByteArray
+		private function handleFileComplete(event:TaskEvent, passThrougData:Object):void
 		{
-			return _loader.data as ByteArray;
-		}
+			var task:SwfLoaderTask = SwfLoaderTask(event.target);
 
-		public override function toString():String
-		{
-			return "[BinaryLoaderTask]";
+			assertNotNull(task.content);
+			assertEquals(container, task.targetContainer);
+			assertEquals(container.getChildAt(0), task.content);
+			assertEquals(550, task.width);
+			assertEquals(400, task.height);
 		}
 	}
 }

@@ -29,14 +29,14 @@ package de.mattesgroeger.task.util
 	import flash.media.SoundLoaderContext;
 	import flash.net.URLRequest;
 
-	public class MP3LoaderTask extends AbstractLoaderTask
+	public class Mp3LoaderTask extends AbstractLoaderTask
 	{
 		protected var _sound:Sound;
 		protected var _soundLoaderContext:SoundLoaderContext;
 
-		public function MP3LoaderTask(file:String, taskName:String = null, soundLoaderContext:SoundLoaderContext = null, sound:Sound = null)
+		public function Mp3LoaderTask(fileUrl:String, taskName:String = null, soundLoaderContext:SoundLoaderContext = null, sound:Sound = null)
 		{
-			super(file, taskName);
+			super(fileUrl, taskName);
 
 			_sound = (sound) ? sound : new Sound();
 			_soundLoaderContext = soundLoaderContext;
@@ -56,7 +56,7 @@ package de.mattesgroeger.task.util
 
 		public override function toString():String
 		{
-			return "[MP3LoaderTask]";
+			return "[Mp3LoaderTask]";
 		}
 
 		protected override function doStart():void

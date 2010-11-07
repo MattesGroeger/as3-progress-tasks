@@ -19,29 +19,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.mattesgroeger.task.util
+package de.mattesgroeger.task.example.tasks
 {
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.utils.ByteArray;
+	import de.mattesgroeger.task.progress.ProgressTaskGroup;
+	import de.mattesgroeger.task.util.BinaryLoaderTask;
+	import de.mattesgroeger.task.util.CssLoaderTask;
+	import de.mattesgroeger.task.util.Mp3LoaderTask;
+	import de.mattesgroeger.task.util.SwfLoaderTask;
+	import de.mattesgroeger.task.util.XmlLoaderTask;
 
-	public class BinaryLoaderTask extends UrlLoaderTask
+	public class FileTaskGroupFactory implements ProgressTaskGroupFactory
 	{
-		public function BinaryLoaderTask(fileUrl:String, label:String = null, loader:URLLoader = null)
+		public function create():ProgressTaskGroup
 		{
-			super(fileUrl, label, loader);
-
-			_loader.dataFormat = URLLoaderDataFormat.BINARY;
-		}
-
-		public function get bytes():ByteArray
-		{
-			return _loader.data as ByteArray;
-		}
-
-		public override function toString():String
-		{
-			return "[BinaryLoaderTask]";
+			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
+			
+			taskGroup.addTask(new BinaryLoaderTask("assets/dummy.bin", "Bytes"));
+			taskGroup.addTask(new CssLoaderTask("assets/dummy.css", "CSS"));
+			taskGroup.addTask(new Mp3LoaderTask("assets/dummy.mp3", "MP3"));
+			taskGroup.addTask(new SwfLoaderTask("assets/dummy.swf", "SWF"));
+			taskGroup.addTask(new XmlLoaderTask("assets/dummy.xml", "XML"));
+			
+			return taskGroup;
 		}
 	}
 }

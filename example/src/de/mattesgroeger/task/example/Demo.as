@@ -21,6 +21,7 @@
  */
 package de.mattesgroeger.task.example
 {
+	import de.mattesgroeger.task.example.tasks.FileTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.NormalTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.ProgressTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.RatioTaskGroupFactory;
@@ -34,28 +35,39 @@ package de.mattesgroeger.task.example
 	import org.spicefactory.lib.task.events.TaskEvent;
 
 	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.MouseEvent;
 
+	[SWF(backgroundColor="#cccccc", frameRate="31", width="550", height="200")]
 	public class Demo extends Sprite
 	{
 		private var progressView:ProgressView;
 		private var taskGroup:ProgressTaskGroup;
-		
+
 		public function Demo()
 		{
+			initializeStage();
 			initializeButtonBar();
 			initializeProgressDisplay();
+		}
+
+		private function initializeStage():void
+		{
+			stage.align = StageAlign.TOP_LEFT;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
 		}
 
 		private function initializeButtonBar():void
 		{
 			var buttonBar:TaskButtonBar = new TaskButtonBar();
 			buttonBar.addEventListener(MouseEvent.CLICK, handleButtonBarClick);
-			
+
 			buttonBar.addButton(new NormalTaskGroupFactory(), "Normal Tasks");
 			buttonBar.addButton(new RatioTaskGroupFactory(), "Ratio Tasks");
 			buttonBar.addButton(new SubTaskGroupFactory(), "SubGroup Tasks");
-			
+			buttonBar.addButton(new FileTaskGroupFactory(), "File Loader Tasks");
+
 			addChild(buttonBar);
 		}
 
@@ -63,7 +75,7 @@ package de.mattesgroeger.task.example
 		{
 			progressView = new ProgressView();
 			addChild(progressView);
-			
+
 			progressView.initialize();
 		}
 
@@ -71,14 +83,14 @@ package de.mattesgroeger.task.example
 		{
 			if (taskGroup != null)
 				resetOldTaskGroup();
-			
+
 			initializeNewTaskGroup(TaskPushButton(event.target).factory);
 		}
 
 		private function resetOldTaskGroup():void
 		{
 			progressView.reset();
-			
+
 			taskGroup.removeEventListener(ProgressTaskEvent.PROGRESS, handleProgress);
 			taskGroup.removeEventListener(TaskEvent.COMPLETE, handleComplete);
 			taskGroup.cancel();
@@ -87,11 +99,11 @@ package de.mattesgroeger.task.example
 		private function initializeNewTaskGroup(factory:ProgressTaskGroupFactory):void
 		{
 			taskGroup = factory.create();
-			
+
 			taskGroup.ignoreChildErrors = true;
 			taskGroup.addEventListener(ProgressTaskEvent.PROGRESS, handleProgress);
 			taskGroup.addEventListener(TaskEvent.COMPLETE, handleComplete);
-			
+
 			taskGroup.start();
 		}
 
