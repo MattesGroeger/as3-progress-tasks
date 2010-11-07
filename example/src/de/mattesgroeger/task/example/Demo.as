@@ -21,24 +21,42 @@
  */
 package de.mattesgroeger.task.example
 {
+	import de.mattesgroeger.task.example.tasks.NormalTaskGroupFactory;
+	import de.mattesgroeger.task.example.tasks.ProgressTaskGroupFactory;
+	import de.mattesgroeger.task.example.tasks.RatioTaskGroupFactory;
+	import de.mattesgroeger.task.example.tasks.SubTaskGroupFactory;
 	import de.mattesgroeger.task.example.view.ProgressView;
+	import de.mattesgroeger.task.example.view.TaskButtonBar;
+	import de.mattesgroeger.task.example.view.TaskPushButton;
 	import de.mattesgroeger.task.progress.ProgressTaskGroup;
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
-	import de.mattesgroeger.task.util.FakeProgressTask;
 
-	import org.spicefactory.lib.task.Task;
 	import org.spicefactory.lib.task.events.TaskEvent;
 
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 
 	public class Demo extends Sprite
 	{
 		private var progressView:ProgressView;
+		private var taskGroup:ProgressTaskGroup;
 		
 		public function Demo()
 		{
+			initializeButtonBar();
 			initializeProgressDisplay();
-			initializeProgressTasks();
+		}
+
+		private function initializeButtonBar():void
+		{
+			var buttonBar:TaskButtonBar = new TaskButtonBar();
+			buttonBar.addEventListener(MouseEvent.CLICK, handleButtonBarClick);
+			
+			buttonBar.addButton(new NormalTaskGroupFactory(), "Normal Tasks");
+			buttonBar.addButton(new RatioTaskGroupFactory(), "Ratio Tasks");
+			buttonBar.addButton(new SubTaskGroupFactory(), "SubGroup Tasks");
+			
+			addChild(buttonBar);
 		}
 
 		private function initializeProgressDisplay():void
@@ -49,33 +67,32 @@ package de.mattesgroeger.task.example
 			progressView.initialize();
 		}
 
-		private function initializeProgressTasks():void
+		private function handleButtonBarClick(event:MouseEvent):void
 		{
-			var fake1:Task = new FakeProgressTask("ROOT TASK 1", 300);
-			var fake2:Task = new FakeProgressTask("ROOT TASK 2", 900);
-			var fakeGroup:Task = getSubGroup();
+			if (taskGroup != null)
+				resetOldTaskGroup();
 			
-			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
+			initializeNewTaskGroup(TaskPushButton(event.target).factory);
+		}
+
+		private function resetOldTaskGroup():void
+		{
+			progressView.reset();
+			
+			taskGroup.removeEventListener(ProgressTaskEvent.PROGRESS, handleProgress);
+			taskGroup.removeEventListener(TaskEvent.COMPLETE, handleComplete);
+			taskGroup.cancel();
+		}
+
+		private function initializeNewTaskGroup(factory:ProgressTaskGroupFactory):void
+		{
+			taskGroup = factory.create();
+			
 			taskGroup.ignoreChildErrors = true;
 			taskGroup.addEventListener(ProgressTaskEvent.PROGRESS, handleProgress);
 			taskGroup.addEventListener(TaskEvent.COMPLETE, handleComplete);
 			
-			taskGroup.addTaskRatio(fake1, 1);
-			taskGroup.addTaskRatio(fakeGroup, 4);
-			taskGroup.addTaskRatio(fake2, 3);
-			
 			taskGroup.start();
-		}
-		
-		private function getSubGroup():ProgressTaskGroup
-		{
-			var subTaskGroup:ProgressTaskGroup = new ProgressTaskGroup("SUBGROUP");
-			
-			subTaskGroup.addTask(new FakeProgressTask("SUB TASK 1", 300));
-			subTaskGroup.addTask(new FakeProgressTask("SUB TASK 2", 300));
-			subTaskGroup.addTask(new FakeProgressTask("SUB TASK 3", 600));
-			
-			return subTaskGroup;
 		}
 
 		private function handleProgress(event:ProgressTaskEvent):void
@@ -86,7 +103,7 @@ package de.mattesgroeger.task.example
 
 		private function handleComplete(event:TaskEvent):void
 		{
-			progressView.setLabel("COMPLETE");
+			progressView.setLabel("FINISHED");
 		}
 	}
 }

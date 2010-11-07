@@ -68,6 +68,12 @@ package de.mattesgroeger.task.example.view
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 		}
 
+		public function reset():void
+		{
+			progressShape.scaleX = 0;
+			targetScale = 0;
+		}
+
 		private function createTextField(fontSize:uint, bold:Boolean, color:uint):TextField
 		{
 			var textFormat:TextFormat = new TextFormat();
@@ -79,6 +85,7 @@ package de.mattesgroeger.task.example.view
 			var textField:TextField = new TextField();
 			textField.defaultTextFormat = textFormat;
 			textField.autoSize = TextFieldAutoSize.LEFT;
+			textField.selectable = false;
 			
 			return textField;
 		}
