@@ -3,3 +3,4 @@
 *.swf
 *.tempViewerHTML.html
 bin/*.swc
+bin/*.zip

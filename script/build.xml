@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="AS3 Progress Tasks"> 
+<project name="AS3 Progress Tasks" default="create zip"> 
 
 	<property file="project.properties" />
 	
@@ -30,6 +30,26 @@
 			<arg line="-ds '${src.dir}' " />
 			<arg line="-window-title 'Adobe ActionScript 3.0 Library - ${project.title}'" />
 		</exec>
+	</target>
+	
+	<target name="create zip" description="create download zip" depends="compile swc">
+		<mkdir dir="${deploy.dir}/zip/dependencies"/>
+		<mkdir dir="${deploy.dir}/zip/release"/>
+		<copy todir="${deploy.dir}/zip/release">
+			<fileset dir="${deploy.dir}">
+				<include name="*.swc"/>
+			</fileset>
+		</copy>
+		<copy todir="${deploy.dir}/zip/dependencies">
+			<fileset dir="${libs.dir}">
+				<include name="spicelib-*.swc"/>
+			</fileset>
+		</copy>
+		<zip destfile="${deploy.dir}/${binary.name}.zip">
+			<fileset dir="${deploy.dir}/zip" />
+		</zip>
+		<delete dir="${deploy.dir}/zip" includeemptydirs="true">
+		</delete>
 	</target>
 	
 </project>
