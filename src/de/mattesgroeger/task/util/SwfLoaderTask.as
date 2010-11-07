@@ -112,7 +112,9 @@ package de.mattesgroeger.task.util
 
 		protected override function handleComplete(event:Event):void
 		{
-			if (_container != null) _container.addChild(_loader.content as Sprite);
+			if (_container != null) 
+				_container.addChild(_loader.content as Sprite);
+			
 			complete();
 			super.handleComplete(event);
 		}
