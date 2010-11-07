@@ -4,3 +4,4 @@
 *.tempViewerHTML.html
 bin/*.swc
 bin/*.zip
+example/bin/*.zip
