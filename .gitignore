@@ -1,4 +1,5 @@
 .settings
 .project
 *.swf
+*.tempViewerHTML.html
 bin/*.swc
