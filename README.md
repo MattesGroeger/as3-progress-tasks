@@ -59,3 +59,4 @@ Roadmap
 
 - Provide ASDocs
 - Provide more examples
+- Add handling for synchronous security errors
