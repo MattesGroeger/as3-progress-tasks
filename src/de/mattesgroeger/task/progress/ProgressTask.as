@@ -30,9 +30,9 @@ package de.mattesgroeger.task.progress
 	{
 		private var _label:String;
 
-		public function ProgressTask(label:String)
+		public function ProgressTask(label:String = null)
 		{
-			_label = label;
+			_label = (label == null) ? "[ProgressTask]" : label;
 			
 			setName(label);
 		}

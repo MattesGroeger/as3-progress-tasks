@@ -48,10 +48,14 @@ package de.mattesgroeger.task.util
 			return _fileUrl;
 		}
 			
+		public override function toString():String
+		{
+			return label;
+		}
+		
 		protected override function doSuspend():void
 		{
 			progress(0);
-			reset();
 		}
 
 		protected override function doResume():void
@@ -62,7 +66,7 @@ package de.mattesgroeger.task.util
 		protected override function doCancel():void
 		{
 			progress(1);
-			destroy();
+			doDestroy();
 		}
 
 		protected override function doError(message:String):void
@@ -70,7 +74,7 @@ package de.mattesgroeger.task.util
 			trace(message);
 			
 			progress(1);
-			destroy();
+			doDestroy();
 		}
 
 		protected function handleError(event:ErrorEvent):void
@@ -85,15 +89,17 @@ package de.mattesgroeger.task.util
 
 		protected function handleComplete(event:Event):void
 		{
-			destroy();
+			doComplete();
+			complete();
+			doDestroy();
 		}
 
-		protected function reset():void
+		protected function doComplete():void
 		{
 			// abstract
 		}
 
-		protected function destroy():void
+		protected function doDestroy():void
 		{
 			// abstract
 		}

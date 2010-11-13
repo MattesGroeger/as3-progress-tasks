@@ -35,6 +35,11 @@ package de.mattesgroeger.task.util
 			_xml = new XML();
 		}
 
+		public function get xml():XML
+		{
+			return _xml;
+		}
+
 		protected override function handleComplete(event:Event):void
 		{
 			try
@@ -50,16 +55,6 @@ package de.mattesgroeger.task.util
 			_xml = xml;
 
 			super.handleComplete(event);
-		}
-
-		public function get xml():XML
-		{
-			return _xml;
-		}
-
-		public override function toString():String
-		{
-			return "[XmlLoaderTask]";
 		}
 	}
 }

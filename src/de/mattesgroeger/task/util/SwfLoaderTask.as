@@ -81,11 +81,6 @@ package de.mattesgroeger.task.util
 			return _container;
 		}
 		
-		public override function toString():String 
-		{
-			return "[SwfLoaderTask]";
-		}
-
 		protected override function doStart():void
 		{
 			super.doStart();
@@ -115,14 +110,13 @@ package de.mattesgroeger.task.util
 			if (_container != null) 
 				_container.addChild(_loader.content as Sprite);
 			
-			complete();
 			super.handleComplete(event);
 		}
 
-		protected override function destroy():void
+		protected override function doDestroy():void
 		{
 			removeListener();
-			super.destroy();
+			super.doDestroy();
 		}
 
 		private function startLoading():void

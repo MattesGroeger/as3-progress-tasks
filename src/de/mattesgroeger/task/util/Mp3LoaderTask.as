@@ -34,9 +34,9 @@ package de.mattesgroeger.task.util
 		protected var _sound:Sound;
 		protected var _soundLoaderContext:SoundLoaderContext;
 
-		public function Mp3LoaderTask(fileUrl:String, taskName:String = null, soundLoaderContext:SoundLoaderContext = null, sound:Sound = null)
+		public function Mp3LoaderTask(fileUrl:String, label:String = null, soundLoaderContext:SoundLoaderContext = null, sound:Sound = null)
 		{
-			super(fileUrl, taskName);
+			super(fileUrl, label);
 
 			_sound = (sound) ? sound : new Sound();
 			_soundLoaderContext = soundLoaderContext;
@@ -54,57 +54,39 @@ package de.mattesgroeger.task.util
 			return _soundLoaderContext;
 		}
 
-		public override function toString():String
-		{
-			return "[Mp3LoaderTask]";
-		}
-
 		protected override function doStart():void
 		{
 			super.doStart();
-
 			startLoading();
 		}
 
 		protected override function doCancel():void
 		{
 			stopLoading();
-
 			super.doCancel();
 		}
 
 		protected override function doSuspend():void
 		{
 			stopLoading();
-
 			super.doSuspend();
 		}
 
 		protected override function doResume():void
 		{
 			startLoading();
-
 			super.doResume();
 		}
 
-		protected override function destroy():void
+		protected override function doDestroy():void
 		{
 			removeListener();
-
-			super.destroy();
-		}
-
-		protected override function handleComplete(event:Event):void
-		{
-			complete();
-
-			super.handleComplete(event);
+			super.doDestroy();
 		}
 
 		private function startLoading():void
 		{
 			addListener();
-
 			_sound.load(new URLRequest(fileUrl), _soundLoaderContext);
 		}
 

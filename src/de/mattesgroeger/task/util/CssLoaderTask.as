@@ -36,21 +36,16 @@ package de.mattesgroeger.task.util
 			_styleSheet = new StyleSheet();
 		}
 		
-		protected override function handleComplete(event : Event) : void
-		{
-			_styleSheet.parseCSS(_loader.data);
-			
-			super.handleComplete(event);
-		}
-		
 		public function get styleSheet() : StyleSheet
 		{
 			return _styleSheet;
 		}
 		
-		public override function toString() : String 
+		protected override function handleComplete(event : Event) : void
 		{
-			return "[CssLoaderTask]";
+			_styleSheet.parseCSS(_loader.data);
+			
+			super.handleComplete(event);
 		}
 	}
 }

@@ -38,10 +38,5 @@ package de.mattesgroeger.task.util
 		{
 			return _loader.data as ByteArray;
 		}
-
-		public override function toString():String
-		{
-			return "[BinaryLoaderTask]";
-		}
 	}
 }

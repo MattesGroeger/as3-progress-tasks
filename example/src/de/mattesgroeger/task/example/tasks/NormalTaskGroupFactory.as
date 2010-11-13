@@ -32,9 +32,9 @@ package de.mattesgroeger.task.example.tasks
 		{
 			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
 			
-			var task1:Task = new FakeProgressTask("TASK 1 (500ms)", 500);
-			var task2:Task = new FakeProgressTask("TASK 2 (2000ms)", 2000);
-			var task3:Task = new FakeProgressTask("TASK 3 (250ms)", 250);
+			var task1:Task = new FakeProgressTask(500,  "TASK 1 (500ms)");
+			var task2:Task = new FakeProgressTask(2000, "TASK 2 (2000ms)");
+			var task3:Task = new FakeProgressTask(250,  "TASK 3 (250ms)");
 			
 			taskGroup.addTask(task1);
 			taskGroup.addTask(task2);

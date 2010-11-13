@@ -49,11 +49,6 @@ package de.mattesgroeger.task.util
 			return _loader.data;
 		}
 
-		public override function toString():String
-		{
-			return "[UrlLoaderTask]";
-		}
-
 		protected override function doStart():void
 		{
 			super.doStart();
@@ -78,16 +73,10 @@ package de.mattesgroeger.task.util
 			super.doCancel();
 		}
 
-		protected override function destroy():void
+		protected override function doDestroy():void
 		{
 			removeListener();
-			super.destroy();
-		}
-
-		protected override function handleComplete(event:Event):void
-		{
-			complete();
-			super.handleComplete(event);
+			super.doDestroy();
 		}
 
 		private function startLoading():void

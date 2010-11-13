@@ -30,7 +30,7 @@ package de.mattesgroeger.task.util
 		private var timer:Timer;
 		private var totalCalls:int;
 
-		public function FakeProgressTask(label:String, timeMs:uint)
+		public function FakeProgressTask(timeMs:uint, label:String = null)
 		{
 			super(label);
 

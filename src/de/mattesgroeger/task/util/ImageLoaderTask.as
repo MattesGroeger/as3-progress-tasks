@@ -31,10 +31,5 @@ package de.mattesgroeger.task.util
 		{
 			super(fileUrl, label, context, loader, targetContainer);
 		}
-
-		public override function toString():String
-		{
-			return "[ImageLoaderTask]";
-		}
 	}
 }

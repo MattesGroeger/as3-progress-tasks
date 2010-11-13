@@ -32,9 +32,9 @@ package de.mattesgroeger.task.example.tasks
 		{
 			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
 			
-			var task1:Task = new FakeProgressTask("TASK 1 (300ms)", 300);
+			var task1:Task = new FakeProgressTask(300, "TASK 1 (300ms)");
 			var task2:Task = getSubTaskGroup();
-			var task3:Task = new FakeProgressTask("TASK 3 (100ms)", 100);
+			var task3:Task = new FakeProgressTask(100, "TASK 3 (100ms)");
 			
 			taskGroup.addTaskWeighted(task1, 3);
 			taskGroup.addTaskWeighted(task2, 8);
@@ -47,9 +47,9 @@ package de.mattesgroeger.task.example.tasks
 		{
 			var subTaskGroup:ProgressTaskGroup = new ProgressTaskGroup("SUBGROUP");
 			
-			subTaskGroup.addTaskWeighted(new FakeProgressTask("SUB TASK 1", 300), 1);
-			subTaskGroup.addTaskWeighted(new FakeProgressTask("SUB TASK 2", 300), 1);
-			subTaskGroup.addTaskWeighted(new FakeProgressTask("SUB TASK 3", 600), 2);
+			subTaskGroup.addTaskWeighted(new FakeProgressTask(300, "SUB TASK 1"), 1);
+			subTaskGroup.addTaskWeighted(new FakeProgressTask(300, "SUB TASK 2"), 1);
+			subTaskGroup.addTaskWeighted(new FakeProgressTask(600, "SUB TASK 3"), 2);
 			
 			return subTaskGroup;
 		}
