@@ -14,6 +14,22 @@ This library goes one step further by adding `ProgressTask`, `ProgressTaskGroup`
 - Get an overall progress for everything
 - Configure loading in different abstraction layers via `TaskGroups`
 
+Change log
+----------
+
+**0.2.0**
+
+* **[Added]** Abstract `doComplete` method in `AbstractLoaderTask` which is called after the results have been set
+* **[Changed]** Label is not required in constructor of `ProgressTasks` anymore (now optional)
+* **[Changed]** General clean up (doesn't effect the external API)
+
+**0.1.0**
+
+* **[Added]** Progress task
+* **[Added]** Sequential progress task group
+* **[Added]** Progress tasks implementations for CSS, Images, MP3, SWF, XML and Binaries
+* **[Added]** FakeProgressTask for emulating progress
+
 Usage
 -----
 
