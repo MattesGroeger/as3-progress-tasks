@@ -84,7 +84,10 @@ package de.mattesgroeger.task.util
 
 		protected function handleProgress(progressEvent:ProgressEvent):void
 		{
-			progress(progressEvent.bytesLoaded / progressEvent.bytesTotal);
+			if (progressEvent.bytesTotal == 0)
+				progress(0);
+			else
+				progress(progressEvent.bytesLoaded / progressEvent.bytesTotal);
 		}
 
 		protected function handleComplete(event:Event):void
