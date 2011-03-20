@@ -17,6 +17,11 @@ This library goes one step further by adding `ProgressTask`, `ProgressTaskGroup`
 Change log
 ----------
 
+**0.2.1**
+
+* **[Fixed]** `SWFLoaderTask` casted loaded data to Sprite which caused a `NullPointer` when loading Bitmaps with the `ImageLoaderTask`
+* **[Fixed]** Calculating progress caused in some browsers errors because totalBytes value was zero
+
 **0.2.0**
 
 * **[Added]** Abstract `doComplete` method in `AbstractLoaderTask` which is called after the results have been set
