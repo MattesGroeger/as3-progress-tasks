@@ -21,16 +21,17 @@
  */
 package de.mattesgroeger.task.example.tasks
 {
-	import de.mattesgroeger.task.progress.ProgressTaskGroup;
+	import de.mattesgroeger.task.progress.IProgressTaskGroup;
+	import de.mattesgroeger.task.progress.SequentialProgressTaskGroup;
 	import de.mattesgroeger.task.util.FakeProgressTask;
 
 	import org.spicefactory.lib.task.Task;
 
 	public class NormalTaskGroupFactory implements ProgressTaskGroupFactory
 	{
-		public function create():ProgressTaskGroup
+		public function create():IProgressTaskGroup
 		{
-			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
+			var taskGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup("ROOT");
 			
 			var task1:Task = new FakeProgressTask(500,  "TASK 1 (500ms)");
 			var task2:Task = new FakeProgressTask(2000, "TASK 2 (2000ms)");

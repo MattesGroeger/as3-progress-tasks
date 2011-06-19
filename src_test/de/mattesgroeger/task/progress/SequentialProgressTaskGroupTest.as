@@ -26,7 +26,7 @@ package de.mattesgroeger.task.progress
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.async.Async;
 
-	public class ProgressTaskGroupTest
+	public class SequentialProgressTaskGroupTest
 	{
 		private var callTimer:uint = 0;
 
@@ -45,7 +45,7 @@ package de.mattesgroeger.task.progress
 		[Test(async)]
 		public function test_normal_progress():void
 		{
-			var group:ProgressTaskGroup = new ProgressTaskGroup();
+			var group:SequentialProgressTaskGroup = new SequentialProgressTaskGroup();
 			group.addTask(new MockProgressTask("task1"));
 			group.addTask(new MockProgressTask("task2"));
 
@@ -58,10 +58,10 @@ package de.mattesgroeger.task.progress
 		[Test(async)]
 		public function test_sub_group_progress():void
 		{
-			var subGroup:ProgressTaskGroup = new ProgressTaskGroup();
+			var subGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup();
 			subGroup.addTask(new MockProgressTask("task2"));
 
-			var group:ProgressTaskGroup = new ProgressTaskGroup();
+			var group:SequentialProgressTaskGroup = new SequentialProgressTaskGroup();
 			group.addTask(new MockProgressTask("task1"));
 			group.addTask(subGroup);
 
@@ -74,7 +74,7 @@ package de.mattesgroeger.task.progress
 		[Test(async)]
 		public function test_weighted_progress():void
 		{
-			var group:ProgressTaskGroup = new ProgressTaskGroup();
+			var group:SequentialProgressTaskGroup = new SequentialProgressTaskGroup();
 			group.addTaskWeighted(new MockProgressTask("task1"), 25);
 			group.addTaskWeighted(new MockProgressTask("task2"), 75);
 
@@ -87,12 +87,12 @@ package de.mattesgroeger.task.progress
 		[Test(async)]
 		public function test_sub_group_weighted_progress():void
 		{
-			var subGroup:ProgressTaskGroup = new ProgressTaskGroup();
+			var subGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup();
 			subGroup.addTask(new MockProgressTask("task2"));
 			subGroup.addTask(new MockProgressTask("task3"));
 			subGroup.addTask(new MockProgressTask("task4"));
 
-			var group:ProgressTaskGroup = new ProgressTaskGroup();
+			var group:SequentialProgressTaskGroup = new SequentialProgressTaskGroup();
 			group.addTaskWeighted(new MockProgressTask("task1"), 25);
 			group.addTaskWeighted(subGroup, 75);
 
@@ -106,7 +106,7 @@ package de.mattesgroeger.task.progress
 												"task4", "task4", "task4"]);
 		}
 
-		private function assertGroupProgress(group:ProgressTaskGroup, expectedProgress:Array, expectedLabels:Array):void
+		private function assertGroupProgress(group:SequentialProgressTaskGroup, expectedProgress:Array, expectedLabels:Array):void
 		{
 			group.addEventListener(ProgressTaskEvent.PROGRESS, Async.asyncHandler(this, assertGroupProgressEvent, 100, {group:group, expectedProgress:expectedProgress, expectedLabels:expectedLabels}));
 			group.start();
@@ -116,7 +116,7 @@ package de.mattesgroeger.task.progress
 		{
 			var expectedProgress:Array = passThroughObject["expectedProgress"];
 			var expectedLabels:Array = passThroughObject["expectedLabels"];
-			var group:ProgressTaskGroup = passThroughObject["group"];
+			var group:SequentialProgressTaskGroup = passThroughObject["group"];
 
 			assertEquals(expectedProgress[callTimer], event.progress);
 			assertEquals(expectedLabels[callTimer], event.label);

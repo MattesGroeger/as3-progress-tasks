@@ -21,16 +21,18 @@
  */
 package de.mattesgroeger.task.example.tasks
 {
+	import de.mattesgroeger.task.progress.IProgressTaskGroup;
 	import de.mattesgroeger.task.progress.ProgressTaskGroup;
+	import de.mattesgroeger.task.progress.SequentialProgressTaskGroup;
 	import de.mattesgroeger.task.util.FakeProgressTask;
 
 	import org.spicefactory.lib.task.Task;
 
 	public class SubTaskGroupFactory implements ProgressTaskGroupFactory
 	{
-		public function create():ProgressTaskGroup
+		public function create():IProgressTaskGroup
 		{
-			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
+			var taskGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup("ROOT");
 			
 			var task1:Task = new FakeProgressTask(300, "TASK 1 (300ms)");
 			var task2:Task = getSubTaskGroup();
@@ -43,9 +45,9 @@ package de.mattesgroeger.task.example.tasks
 			return taskGroup;
 		}
 		
-		private function getSubTaskGroup():ProgressTaskGroup
+		private function getSubTaskGroup():SequentialProgressTaskGroup
 		{
-			var subTaskGroup:ProgressTaskGroup = new ProgressTaskGroup("SUBGROUP");
+			var subTaskGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup("SUBGROUP");
 			
 			subTaskGroup.addTaskWeighted(new FakeProgressTask(300, "SUB TASK 1"), 1);
 			subTaskGroup.addTaskWeighted(new FakeProgressTask(300, "SUB TASK 2"), 1);

@@ -21,10 +21,10 @@
  */
 package de.mattesgroeger.task.example.tasks
 {
-	import de.mattesgroeger.task.progress.ProgressTaskGroup;
+	import de.mattesgroeger.task.progress.IProgressTaskGroup;
 
 	public interface ProgressTaskGroupFactory
 	{
-		function create():ProgressTaskGroup;
+		function create():IProgressTaskGroup;
 	}
 }

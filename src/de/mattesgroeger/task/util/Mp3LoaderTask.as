@@ -38,7 +38,7 @@ package de.mattesgroeger.task.util
 		{
 			super(fileUrl, label);
 
-			_sound = (sound) ? sound : new Sound();
+			_sound = (sound != null) ? sound : new Sound();
 			_soundLoaderContext = soundLoaderContext;
 
 			addListener();

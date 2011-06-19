@@ -28,18 +28,17 @@ package de.mattesgroeger.task.progress
 	import org.spicefactory.lib.task.enum.TaskState;
 
 	import flash.utils.Dictionary;
-	
-	[Deprecated(replacement="SequentialProgressTaskGroup", since="0.3.0")]
-	public class ProgressTaskGroup extends SequentialTaskGroup implements IProgressTaskGroup
+
+	public class SequentialProgressTaskGroup extends SequentialTaskGroup implements IProgressTaskGroup
 	{
 		private var totalWeight:uint = 0;
 		private var weightMap:Dictionary = new Dictionary(true);
 		private var completedProgress:uint = 0;
-		
-		public function ProgressTaskGroup(label:String = null)
+
+		public function SequentialProgressTaskGroup(label:String = null)
 		{
 			if (label == null)
-				label = "[ProgressTaskGroup]";
+				label = "[SequentialProgressTaskGroup]";
 			
 			setName(label);
 			

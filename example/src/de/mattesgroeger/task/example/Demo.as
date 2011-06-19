@@ -21,15 +21,16 @@
  */
 package de.mattesgroeger.task.example
 {
+	import de.mattesgroeger.task.example.tasks.WeightedSequentialTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.FileTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.NormalTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.ProgressTaskGroupFactory;
-	import de.mattesgroeger.task.example.tasks.WeightedTaskGroupFactory;
 	import de.mattesgroeger.task.example.tasks.SubTaskGroupFactory;
+	import de.mattesgroeger.task.example.tasks.WeightedConcurrentTaskGroupFactory;
 	import de.mattesgroeger.task.example.view.ProgressView;
 	import de.mattesgroeger.task.example.view.TaskButtonBar;
 	import de.mattesgroeger.task.example.view.TaskPushButton;
-	import de.mattesgroeger.task.progress.ProgressTaskGroup;
+	import de.mattesgroeger.task.progress.IProgressTaskGroup;
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
 
 	import org.spicefactory.lib.task.events.TaskEvent;
@@ -43,7 +44,7 @@ package de.mattesgroeger.task.example
 	public class Demo extends Sprite
 	{
 		private var progressView:ProgressView;
-		private var taskGroup:ProgressTaskGroup;
+		private var taskGroup:IProgressTaskGroup;
 
 		public function Demo()
 		{
@@ -64,7 +65,8 @@ package de.mattesgroeger.task.example
 			buttonBar.addEventListener(MouseEvent.CLICK, handleButtonBarClick);
 
 			buttonBar.addButton(new NormalTaskGroupFactory(), "Normal Tasks");
-			buttonBar.addButton(new WeightedTaskGroupFactory(), "Weighted Tasks");
+			buttonBar.addButton(new WeightedSequentialTaskGroupFactory(), "Weighted Sequential");
+			buttonBar.addButton(new WeightedConcurrentTaskGroupFactory(), "Weighted Concurrent");
 			buttonBar.addButton(new SubTaskGroupFactory(), "SubGroup Tasks");
 			buttonBar.addButton(new FileTaskGroupFactory(), "File Loader Tasks");
 

@@ -23,23 +23,23 @@ package de.mattesgroeger.task.progress
 {
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
 
-	import org.spicefactory.lib.task.SequentialTaskGroup;
+	import org.spicefactory.lib.task.ConcurrentTaskGroup;
 	import org.spicefactory.lib.task.Task;
 	import org.spicefactory.lib.task.enum.TaskState;
 
 	import flash.utils.Dictionary;
 	
-	[Deprecated(replacement="SequentialProgressTaskGroup", since="0.3.0")]
-	public class ProgressTaskGroup extends SequentialTaskGroup implements IProgressTaskGroup
+	[Event(name="progress", type="de.mattesgroeger.task.progress.events.ProgressTaskEvent")]
+	public class ConcurrentProgressTaskGroup extends ConcurrentTaskGroup implements IProgressTaskGroup
 	{
 		private var totalWeight:uint = 0;
 		private var weightMap:Dictionary = new Dictionary(true);
 		private var completedProgress:uint = 0;
-		
-		public function ProgressTaskGroup(label:String = null)
+
+		public function ConcurrentProgressTaskGroup(label:String = null)
 		{
 			if (label == null)
-				label = "[ProgressTaskGroup]";
+				label = "[ConcurrentProgressTaskGroup]";
 			
 			setName(label);
 			

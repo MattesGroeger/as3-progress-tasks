@@ -21,7 +21,8 @@
  */
 package de.mattesgroeger.task.example.tasks
 {
-	import de.mattesgroeger.task.progress.ProgressTaskGroup;
+	import de.mattesgroeger.task.progress.IProgressTaskGroup;
+	import de.mattesgroeger.task.progress.SequentialProgressTaskGroup;
 	import de.mattesgroeger.task.util.BinaryLoaderTask;
 	import de.mattesgroeger.task.util.CssLoaderTask;
 	import de.mattesgroeger.task.util.Mp3LoaderTask;
@@ -30,9 +31,9 @@ package de.mattesgroeger.task.example.tasks
 
 	public class FileTaskGroupFactory implements ProgressTaskGroupFactory
 	{
-		public function create():ProgressTaskGroup
+		public function create():IProgressTaskGroup
 		{
-			var taskGroup:ProgressTaskGroup = new ProgressTaskGroup("ROOT");
+			var taskGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup("ROOT");
 			
 			taskGroup.addTask(new BinaryLoaderTask("assets/dummy.bin", "Bytes"));
 			taskGroup.addTask(new CssLoaderTask("assets/dummy.css", "CSS"));

@@ -19,27 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package
+package de.mattesgroeger.task.example.tasks
 {
-	import de.mattesgroeger.task.progress.SequentialProgressTaskGroupTest;
-	import de.mattesgroeger.task.progress.ProgressTaskTest;
-	import de.mattesgroeger.task.util.BinaryLoaderTaskTest;
-	import de.mattesgroeger.task.util.CssLoaderTaskTest;
-	import de.mattesgroeger.task.util.Mp3LoaderTaskTest;
-	import de.mattesgroeger.task.util.SwfLoaderTaskTest;
-	import de.mattesgroeger.task.util.XmlLoaderTaskTest;
+	import de.mattesgroeger.task.progress.IProgressTaskGroup;
+	import de.mattesgroeger.task.progress.SequentialProgressTaskGroup;
+	import de.mattesgroeger.task.util.FakeProgressTask;
 
-	[Suite]
-	[RunWith("org.flexunit.runners.Suite")]
-	public class ModulesTestSuite
+	import org.spicefactory.lib.task.Task;
+
+	public class WeightedSequentialTaskGroupFactory implements ProgressTaskGroupFactory
 	{
-		public var progressTaskTest:ProgressTaskTest;
-		public var progressTaskGroupTest:SequentialProgressTaskGroupTest;
-		
-		public var binaryLoaderTaskTest:BinaryLoaderTaskTest;
-		public var cssLoaderTaskTest:CssLoaderTaskTest;
-		public var mp3LoaderTaskTest:Mp3LoaderTaskTest;
-		public var swfLoaderTaskTest:SwfLoaderTaskTest;
-		public var xmlLoaderTaskTest:XmlLoaderTaskTest;
+		public function create():IProgressTaskGroup
+		{
+			var taskGroup:SequentialProgressTaskGroup = new SequentialProgressTaskGroup("ROOT");
+			
+			var task1:Task = new FakeProgressTask(500,  "TASK 1 (500ms, weight 2)");
+			var task2:Task = new FakeProgressTask(2000, "TASK 2 (2000ms, weight 8)");
+			var task3:Task = new FakeProgressTask(250,  "TASK 3 (250ms, weight 1)");
+			
+			taskGroup.addTaskWeighted(task1, 2);
+			taskGroup.addTaskWeighted(task2, 8);
+			taskGroup.addTaskWeighted(task3, 1);
+			
+			return taskGroup;
+		}
 	}
 }

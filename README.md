@@ -17,6 +17,12 @@ This library goes one step further by adding `ProgressTask`, `ProgressTaskGroup`
 Change log
 ----------
 
+**0.3.0**
+
+* **[Added]** Support for concurrent progress task groups. Use `ConcurrentProgressTaskGroup`
+* **[Added]** Interfaces `IProgressTask` and `IProgressTaskGroup` added
+* **[Changed]** Former `ProgressTaskGroup` is now `SequentialProgressTaskGroup`, old class still exists for backward compatibility
+
 **0.2.1**
 
 * **[Fixed]** `SWFLoaderTask` casted loaded data to Sprite which caused a `NullPointer` when loading Bitmaps with the `ImageLoaderTask`
