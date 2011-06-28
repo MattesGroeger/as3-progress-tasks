@@ -31,25 +31,25 @@ package de.mattesgroeger.task.util
 
 	public class LoaderInfoProgressTask extends ProgressTask
 	{
-		private var _loaderInfo : LoaderInfo;
+		private var _loaderInfo:LoaderInfo;
 
-		public function LoaderInfoProgressTask( loaderInfo : LoaderInfo, label : String = null )
+		public function LoaderInfoProgressTask(loaderInfo:LoaderInfo, label:String = null)
 		{
-			super( label );
+			super(label);
 
-			setCancelable( false );
-			setSuspendable( false );
-			setSkippable( false );
+			setCancelable(false);
+			setSuspendable(false);
+			setSkippable(false);
 
 			_loaderInfo = loaderInfo;
 		}
 
-		public function get loaderInfo() : LoaderInfo
+		public function get loaderInfo():LoaderInfo
 		{
 			return _loaderInfo;
 		}
 
-		protected override function doStart() : void
+		protected override function doStart():void
 		{
 			super.doStart();
 
@@ -59,39 +59,39 @@ package de.mattesgroeger.task.util
 				addListener();
 		}
 
-		protected function handleComplete( event : Event ) : void
+		protected function handleComplete(event:Event):void
 		{
 			removeListener();
 			complete();
 		}
 
-		protected function handleError( event : ErrorEvent ) : void
+		protected function handleError(event:ErrorEvent):void
 		{
 			removeListener();
-			progress( 1 );
-			error( "Error loading " + loaderInfo.loaderURL + ": " + event.text );
+			progress(1);
+			error("Error loading " + loaderInfo.loaderURL + ": " + event.text);
 		}
 
-		protected function handleProgress( progressEvent : ProgressEvent ) : void
+		protected function handleProgress(progressEvent:ProgressEvent):void
 		{
 			if ( progressEvent.bytesTotal == 0 )
-				progress( 0 );
+				progress(0);
 			else
-				progress( progressEvent.bytesLoaded / progressEvent.bytesTotal );
+				progress(progressEvent.bytesLoaded / progressEvent.bytesTotal);
 		}
 
-		private function addListener() : void
+		private function addListener():void
 		{
-			loaderInfo.addEventListener( IOErrorEvent.IO_ERROR, handleError );
-			loaderInfo.addEventListener( ProgressEvent.PROGRESS, handleProgress );
-			loaderInfo.addEventListener( Event.COMPLETE, handleComplete );
+			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handleError);
+			loaderInfo.addEventListener(ProgressEvent.PROGRESS, handleProgress);
+			loaderInfo.addEventListener(Event.COMPLETE, handleComplete);
 		}
 
-		private function removeListener() : void
+		private function removeListener():void
 		{
-			loaderInfo.removeEventListener( IOErrorEvent.IO_ERROR, handleError );
-			loaderInfo.removeEventListener( ProgressEvent.PROGRESS, handleProgress );
-			loaderInfo.removeEventListener( Event.COMPLETE, handleComplete );
+			loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, handleError);
+			loaderInfo.removeEventListener(ProgressEvent.PROGRESS, handleProgress);
+			loaderInfo.removeEventListener(Event.COMPLETE, handleComplete);
 		}
 	}
 }

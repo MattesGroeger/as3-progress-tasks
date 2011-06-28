@@ -16,7 +16,7 @@
 			{
 				flexUnitCore = new FlexUnitCore();
 				flexUnitCore.addListener(new UIListener(testRunner));
-				flexUnitCore.run(ModulesTestSuite);
+				flexUnitCore.run(CheatsTestSuite);
 			}
 		]]>
 	</fx:Script>

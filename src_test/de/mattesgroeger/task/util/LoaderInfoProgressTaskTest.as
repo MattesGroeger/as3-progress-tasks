@@ -35,24 +35,24 @@ package de.mattesgroeger.task.util
 	public class LoaderInfoProgressTaskTest
 	{
 		[Test(async)]
-		public function test_loading() : void
+		public function test_loading():void
 		{
-			var request : URLRequest = new URLRequest( "assets/dummy.swf" );
+			var request:URLRequest = new URLRequest("assets/dummy.swf");
 
-			var loader : Loader = new Loader();
-			loader.load( request );
+			var loader:Loader = new Loader();
+			loader.load(request);
 
-			var task : LoaderInfoProgressTask = new LoaderInfoProgressTask( loader.contentLoaderInfo );
-			task.addEventListener( TaskEvent.COMPLETE, Async.asyncHandler( this, handleLoaderComplete, 1000 ) );
+			var task:LoaderInfoProgressTask = new LoaderInfoProgressTask(loader.contentLoaderInfo);
+			task.addEventListener(TaskEvent.COMPLETE, Async.asyncHandler(this, handleLoaderComplete, 1000));
 			task.start();
 		}
 
-		private function handleLoaderComplete( event : TaskEvent, ...args ) : void
+		private function handleLoaderComplete(event:TaskEvent, ...args):void
 		{
-			var loaderInfo : LoaderInfo = LoaderInfoProgressTask( event.target ).loaderInfo ;
+			var loaderInfo:LoaderInfo = LoaderInfoProgressTask(event.target).loaderInfo ;
 
-			assertThat( "unexpected bytesTotal value", loaderInfo.bytesTotal, not( equalTo( 0 ) ) );
-			assertEquals( "unexpected bytesLoaded value", loaderInfo.bytesTotal, loaderInfo.bytesLoaded );
+			assertThat("unexpected bytesTotal value", loaderInfo.bytesTotal, not(equalTo(0)));
+			assertEquals("unexpected bytesLoaded value", loaderInfo.bytesTotal, loaderInfo.bytesLoaded);
 		}
 	}
 }

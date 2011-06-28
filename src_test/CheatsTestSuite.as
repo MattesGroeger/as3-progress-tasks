@@ -19,17 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.mattesgroeger.task.util
+package
 {
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Loader;
-	import flash.system.LoaderContext;
+	import de.mattesgroeger.task.progress.SequentialProgressTaskGroupTest;
+	import de.mattesgroeger.task.progress.ProgressTaskTest;
+	import de.mattesgroeger.task.util.BinaryLoaderTaskTest;
+	import de.mattesgroeger.task.util.CssLoaderTaskTest;
+	import de.mattesgroeger.task.util.Mp3LoaderTaskTest;
+	import de.mattesgroeger.task.util.SwfLoaderTaskTest;
+	import de.mattesgroeger.task.util.XmlLoaderTaskTest;
 
-	public class ImageLoaderTask extends SwfLoaderTask
+	[Suite]
+	[RunWith("org.flexunit.runners.Suite")]
+	public class CheatsTestSuite
 	{
-		public function ImageLoaderTask(fileUrl:String, label:String = null, context:LoaderContext = null, loader:Loader = null, targetContainer:DisplayObjectContainer = null)
-		{
-			super(fileUrl, label, context, loader, targetContainer);
-		}
+		public var progressTaskTest:ProgressTaskTest;
+		public var progressTaskGroupTest:SequentialProgressTaskGroupTest;
+		
+		public var binaryLoaderTaskTest:BinaryLoaderTaskTest;
+		public var cssLoaderTaskTest:CssLoaderTaskTest;
+		public var mp3LoaderTaskTest:Mp3LoaderTaskTest;
+		public var swfLoaderTaskTest:SwfLoaderTaskTest;
+		public var xmlLoaderTaskTest:XmlLoaderTaskTest;
 	}
 }
