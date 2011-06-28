@@ -17,6 +17,10 @@ This library goes one step further by adding `ProgressTask`, `ProgressTaskGroup`
 Change log
 ----------
 
+**0.3.1** (not yet released)
+
+* **[Added]** `LoaderInfoProgressTask` that allows tracking progress of an existing LoaderInfo process, useful for pre-loaders. Contribution by Peter Höche, thanks!
+
 **0.3.0**
 
 * **[Added]** Support for concurrent progress task groups. Use `ConcurrentProgressTaskGroup`
