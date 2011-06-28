@@ -21,6 +21,7 @@
  */
 package
 {
+	import de.mattesgroeger.task.util.LoaderInfoProgressTaskTest;
 	import de.mattesgroeger.task.progress.SequentialProgressTaskGroupTest;
 	import de.mattesgroeger.task.progress.ProgressTaskTest;
 	import de.mattesgroeger.task.util.BinaryLoaderTaskTest;
@@ -38,6 +39,7 @@ package
 		
 		public var binaryLoaderTaskTest:BinaryLoaderTaskTest;
 		public var cssLoaderTaskTest:CssLoaderTaskTest;
+		public var loaderInfoProgressTaskTest:LoaderInfoProgressTaskTest;
 		public var mp3LoaderTaskTest:Mp3LoaderTaskTest;
 		public var swfLoaderTaskTest:SwfLoaderTaskTest;
 		public var xmlLoaderTaskTest:XmlLoaderTaskTest;
