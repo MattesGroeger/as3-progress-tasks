@@ -21,6 +21,8 @@
  */
 package de.mattesgroeger.task.progress
 {
+	import flash.utils.getQualifiedClassName;
+	import org.spicefactory.lib.util.ClassUtil;
 	import de.mattesgroeger.task.progress.events.ProgressTaskEvent;
 
 	import org.spicefactory.lib.errors.IllegalArgumentError;
@@ -50,7 +52,7 @@ package de.mattesgroeger.task.progress
 		protected function progress(progress:Number):void
 		{
 			if (progress < 0 || progress > 1)
-				throw new IllegalArgumentError("Allowed progress range reaches from 0 to 1, but is currently " + progress);
+				throw new IllegalArgumentError("Wrong progress in Class: '" + getQualifiedClassName( this ) + "'.Allowed progress range reaches from 0 to 1, but is currently " + progress);
 			
 			if (parent != null && parent is IProgressTaskGroup)
 				IProgressTaskGroup(parent).progressChild(this, progress, _label);

@@ -76,8 +76,10 @@ package de.mattesgroeger.task.util
 		{
 			if ( progressEvent.bytesTotal == 0 )
 				progress(0);
+			else if ( progressEvent.bytesLoaded > progressEvent.bytesTotal  )
+				progress( 1 );
 			else
-				progress(progressEvent.bytesLoaded / progressEvent.bytesTotal);
+				progress( progressEvent.bytesLoaded / progressEvent.bytesTotal );
 		}
 
 		private function addListener():void
