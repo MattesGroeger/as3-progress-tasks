@@ -20,6 +20,7 @@ Change log
 **0.3.1** (not yet released)
 
 * **[Added]** `LoaderInfoProgressTask` that allows tracking progress of an existing LoaderInfo process, useful for pre-loaders. Contribution by Peter Höche, thanks!
+* **[Fixed]** `AbstractLoaderTask` and `LoaderInfoProgressTask` set progress to 1 when bytesLoaded are higher than bytesTotal
 
 **0.3.0**
 

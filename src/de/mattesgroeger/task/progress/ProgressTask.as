@@ -52,7 +52,7 @@ package de.mattesgroeger.task.progress
 		protected function progress(progress:Number):void
 		{
 			if (progress < 0 || progress > 1)
-				throw new IllegalArgumentError("Wrong progress in Class: '" + getQualifiedClassName( this ) + "'.Allowed progress range reaches from 0 to 1, but is currently " + progress);
+				throw new IllegalArgumentError("Wrong progress in Class: '" + getQualifiedClassName(this) + "'.Allowed progress range reaches from 0 to 1, but is currently " + progress);
 			
 			if (parent != null && parent is IProgressTaskGroup)
 				IProgressTaskGroup(parent).progressChild(this, progress, _label);
